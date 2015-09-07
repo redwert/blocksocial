@@ -38,3 +38,4 @@
 		{if $vk_url != ''}<li class="vk"><a class="_blank" href="{$vk_url|escape:html:'UTF-8'}">{l s='Vkontakte' mod='blocksocial'}</a></li>{/if}
 	</ul>
 </div>
+
