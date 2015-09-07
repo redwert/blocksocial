@@ -35,10 +35,8 @@ class blocksocial extends Module
 		$this->tab = 'front_office_features';
 		$this->version = '1.2.1';
 		$this->author = 'PrestaShop';
-
 		$this->bootstrap = true;
 		parent::__construct();	
-
 		$this->displayName = $this->l('Social networking block');
 		$this->description = $this->l('Allows you to add information about your brand\'s social networking accounts.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
@@ -54,6 +52,7 @@ class blocksocial extends Module
 			Configuration::updateValue('BLOCKSOCIAL_PINTEREST', '') && 
 			Configuration::updateValue('BLOCKSOCIAL_VIMEO', '') &&
 			Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', '') &&
+			Configuration::updateValue('BLOCKSOCIAL_VK', '') &&
 			$this->registerHook('displayHeader') && 
 			$this->registerHook('displayFooter'));
 	}
@@ -69,6 +68,7 @@ class blocksocial extends Module
 			Configuration::deleteByName('BLOCKSOCIAL_PINTEREST') AND
 			Configuration::deleteByName('BLOCKSOCIAL_VIMEO') AND
 			Configuration::deleteByName('BLOCKSOCIAL_INSTAGRAM') AND
+			Configuration::deleteByName('BLOCKSOCIAL_VK') AND
 			parent::uninstall());
 	}
 	
@@ -86,6 +86,7 @@ class blocksocial extends Module
 			Configuration::updateValue('BLOCKSOCIAL_PINTEREST', Tools::getValue('blocksocial_pinterest', ''));
 			Configuration::updateValue('BLOCKSOCIAL_VIMEO', Tools::getValue('blocksocial_vimeo', ''));
 			Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', Tools::getValue('blocksocial_instagram', ''));
+			Configuration::updateValue('BLOCKSOCIAL_VK', Tools::getValue('blocksocial_vk', ''));
 			$this->_clearCache('blocksocial.tpl');
 			Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules').'&configure='.$this->name.'&tab_module='.$this->tab.'&conf=4&module_name='.$this->name);
 		}
@@ -110,8 +111,8 @@ class blocksocial extends Module
 				'pinterest_url' => Configuration::get('BLOCKSOCIAL_PINTEREST'),
 				'vimeo_url' => Configuration::get('BLOCKSOCIAL_VIMEO'),
 				'instagram_url' => Configuration::get('BLOCKSOCIAL_INSTAGRAM'),
+				'vk_url' => Configuration::get('BLOCKSOCIAL_VK'),
 			));
-
 		return $this->display(__FILE__, 'blocksocial.tpl', $this->getCacheId());
 	}
 	
@@ -172,6 +173,12 @@ class blocksocial extends Module
 						'name' => 'blocksocial_instagram',						
 						'desc' => $this->l('Your official Instagram account.'),					
 					),
+					array(						
+						'type' => 'text',						
+						'label' => $this->l('Vkontakte URL:'),						
+						'name' => 'blocksocial_vk',						
+						'desc' => $this->l('Your official Vkontakte account.'),
+					),
 				),
 				'submit' => array(
 					'title' => $this->l('Save'),
@@ -194,7 +201,6 @@ class blocksocial extends Module
 			'languages' => $this->context->controller->getLanguages(),
 			'id_language' => $this->context->language->id
 		);
-
 		return $helper->generateForm(array($fields_form));
 	}
 	
@@ -209,7 +215,7 @@ class blocksocial extends Module
 			'blocksocial_pinterest' => Tools::getValue('blocksocial_pinterest', Configuration::get('BLOCKSOCIAL_PINTEREST')),
 			'blocksocial_vimeo' => Tools::getValue('blocksocial_vimeo', Configuration::get('BLOCKSOCIAL_VIMEO')),
 			'blocksocial_instagram' => Tools::getValue('blocksocial_instagram', Configuration::get('BLOCKSOCIAL_INSTAGRAM')),
+			'blocksocial_vk' => Tools::getValue('blocksocial_vk', Configuration::get('BLOCKSOCIAL_VK')),
 		);
 	}
-
 }
