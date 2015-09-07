@@ -35,5 +35,6 @@
 		{if $pinterest_url != ''}<li class="pinterest"><a class="_blank" href="{$pinterest_url|escape:html:'UTF-8'}">{l s='Pinterest' mod='blocksocial'}</a></li>{/if}
 		{if $vimeo_url != ''}<li class="vimeo"><a href="{$vimeo_url|escape:html:'UTF-8'}">{l s='Vimeo' mod='blocksocial'}</a></li>{/if}
 		{if $instagram_url != ''}<li class="instagram"><a class="_blank" href="{$instagram_url|escape:html:'UTF-8'}">{l s='Instagram' mod='blocksocial'}</a></li>{/if}
+		{if $vk_url != ''}<li class="vk"><a class="_blank" href="{$vk_url|escape:html:'UTF-8'}">{l s='Vkontakte' mod='blocksocial'}</a></li>{/if}
 	</ul>
 </div>
